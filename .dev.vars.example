@@ -1,0 +1,2 @@
+# Copy to .dev.vars for `npm run dev`. Without ADMIN_TOKEN, no one can create an address.
+ADMIN_TOKEN=change-me

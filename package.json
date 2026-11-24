@@ -1,0 +1,25 @@
+{
+  "name": "inboxprobe",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "wrangler types --strict-vars=false && tsc",
+    "db:migrate": "wrangler d1 migrations apply DB --remote",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5",
+    "wrangler": "^4.152.0"
+  },
+  "dependencies": {
+    "postal-mime": "^4.1.4"
+  },
+  "license": "MIT",
+  "private": true
+}

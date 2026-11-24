@@ -1,0 +1,22 @@
+// Fill in the <…> values before deploying (README → Deploy your own).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "inboxprobe",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+  "workers_dev": true,
+  // Optional: a hostname on your domain for the API, the MCP server and the calendar. Remove to use only
+  // the workers.dev address.
+  "routes": [{ "pattern": "dav.<your domain>", "custom_domain": true }],
+  "vars": {
+    // The domain addresses live on: name@DOMAIN. Its Email Routing catch-all sends to this Worker.
+    "DOMAIN": "<your domain>"
+  },
+  // Secret: ADMIN_TOKEN (creating addresses and /admin/*), set with `wrangler secret put ADMIN_TOKEN`.
+  "d1_databases": [{ "binding": "DB", "database_name": "inboxprobe", "database_id": "<from wrangler d1 create>", "migrations_dir": "migrations" }],
+  "r2_buckets": [{ "binding": "MAIL", "bucket_name": "inboxprobe-mail" }],
+  // Turns on the public MCP server at /mcp and caps the inboxes it creates: 10 a minute per IP.
+  // Remove it to turn /mcp off.
+  "ratelimits": [{ "name": "MCP_CREATE", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } }]
+}
